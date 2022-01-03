@@ -64,6 +64,7 @@ public class UserController {
         User userToUpdate = userRepository.findById(id).get();
         userToUpdate.setName(user.getName());
         userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setDepartment(user.getDepartment());
         final User userUpdated = userRepository.save(userToUpdate);
         return ResponseEntity.ok().body(userUpdated);
     }
