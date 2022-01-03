@@ -46,6 +46,12 @@ public class DepartmentController {
         return ResponseEntity.ok().body(department);
     }
 
-
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department body){
+        Department department = departmentRepository.findById(id).get();
+        department.setName(body.getName());
+        final Department updatedDepartment = departmentRepository.save(department);
+        return ResponseEntity.ok().body(updatedDepartment);
+    }
 
 }

@@ -57,4 +57,14 @@ public class UserController {
         }
         return ResponseEntity.noContent().location(location).build();
     }
+
+    @PutMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
+        User userToUpdate = userRepository.findById(id).get();
+        userToUpdate.setName(user.getName());
+        userToUpdate.setEmail(user.getEmail());
+        final User userUpdated = userRepository.save(userToUpdate);
+        return ResponseEntity.ok().body(userUpdated);
+    }
 }
